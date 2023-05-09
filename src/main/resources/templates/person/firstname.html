@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Firstname</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        p {
+            display: block;
+            margin: 10px 0;
+        }
+
+        span {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Person Info:</h1>
+    <form th:action="@{/people/{firstname}/firstname(firstname=${person.firstname})}" method="post" th:object="${person}">
+        <p>Firstname: <span th:text="${person.firstname}"></span></p>
+        <p>Lastname: <span th:text="${person.lastname}"></span></p>
+        <p>Age: <span th:text="${person.age}"></span></p>
+        <p>Birth Date: <span th:text="${person.birthDate}"></span></p>
+        <p>Number of requests: <span th:text="${count}"></span></p>
+    </form>
+</div>
+</body>
+
+</html>

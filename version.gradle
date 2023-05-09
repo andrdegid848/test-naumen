@@ -1,0 +1,5 @@
+ext {
+    versions = [
+            mapper: '3.1.1'
+    ]
+}

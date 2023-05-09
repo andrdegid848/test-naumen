@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hello!</h1>
+    <h2>All people's names and their ID numbers:</h2>
+    <div th:each="person : ${people}">
+        <a th:text="${person.firstname + ', ' + person.id}">User</a><br/>
+    </div>
+    <br/>
+    <hr/>
+    <br/>
+    <h3>The person with the greatest age</h3>
+    <div th:if="${oldPerson.isPresent()}">
+        <p>Firstname: <span th:text="${oldPerson.get().firstname}"></span></p>
+        <p>Age: <span th:text="${oldPerson.get().age}"></span></p>
+    </div>
+    <div th:if="${oldPerson.isEmpty()}">
+        <p>No information</p>
+    </div>
+    <br/>
+    <form id="findForm" th:method="GET" th:action="@{/people/{firstname}/firstname}">
+        <label for="firstname">Enter firstname:</label>
+        <input type="text" id="firstname" name="firstname" placeholder="Firstname">
+        <button type="submit">Find by firstname</button>
+    </form>
+    <br/>
+    <form id="editForm" th:method="GET" th:action="@{/people/{id}/edit}">
+        <label for="id">Enter ID:</label>
+        <input type="number" id="id" name="id" placeholder="ID number">
+        <button type="submit">Edit</button>
+    </form>
+    <br/>
+    <form id="createForm" th:method="GET" th:action="@{/people/person}">
+        <label>Click to add person:</label>
+        <button type="submit">Create</button>
+    </form>
+    <br/>
+</div>
+
+<script>
+    const editForm = document.querySelector('#editForm');
+    const findForm = document.querySelector('#findForm');
+
+    const idInput = editForm.querySelector('#id');
+    const firstnameInput = findForm.querySelector('#firstname');
+
+    editForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const idValue = idInput.value;
+        const url = '/people/' + idValue + '/edit';
+        window.location.href = url;
+    });
+
+    findForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const firstnameValue = firstnameInput.value;
+        const url = '/people/' + firstnameValue + '/firstname';
+        window.location.href = url;
+    });
+</script>
+</body>
+</html>

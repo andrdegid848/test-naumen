@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: ${db.url}
+    username: ${db.user}
+    password: ${db.password}
+    driver-class-name: ${db.driver}
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: validate
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+    open-in-view: false
+  config:
+    import: classpath:/database.properties
+
+server:
+  port: 8082

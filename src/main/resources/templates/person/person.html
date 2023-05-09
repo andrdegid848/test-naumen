@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Person registration form</h1>
+    <form th:action="@{/people}" th:method="post" th:object="${person}">
+        <label for="firstname">Firstname:</label>
+            <input id="firstname" type="text" name="firstname" th:field="*{firstname}">
+        <label for="lastname">Lastname:</label>
+            <input id="lastname" type="text" name="lastname" th:field="*{lastname}">
+        <label for="age">Age:</label>
+            <input id="age" type="number" name="age" th:field="*{age}">
+        <label for="birthDate">BirthDate:</label>
+            <input id="birthDate" type="date" name="birthDate" th:field="*{birthDate}">
+        <button type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>
