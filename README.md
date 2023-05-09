@@ -18,9 +18,13 @@ H2DB
 
 PostgreSQL
 
+Model Mapper
+
 HTML
 
 CSS
+
+Thymeleaf
 
 Gradle
 
